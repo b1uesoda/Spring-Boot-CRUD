@@ -46,6 +46,20 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product update(Long id, Product product) {
+        try {
+            Optional<Product> productData = productRepository.findById(id);
+            if (productData.isPresent()) {
+                Product _product = productData.get();
+                _product.setProductName(product.getProductName());
+                _product.setPrice(product.getPrice());
+                productRepository.save(_product);
+                return _product;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
