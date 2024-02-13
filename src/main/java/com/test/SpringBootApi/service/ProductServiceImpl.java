@@ -16,8 +16,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product save(Product product) {
         try {
-            return productRepository
+            return productRepository.save(
+                    new Product(
+                            product.getProductName(),
+                            product.getPrice()
+                    )
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        return null;
     }
 
     @Override
